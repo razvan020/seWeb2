@@ -54,7 +54,7 @@
                         <div class="card-header d-flex justify-content-between align-items-center">
                             <h2 th:text="${book.title}">Book Title</h2>
                             <div>
-                                <a th:href="@{'/edit-book/' + ${#strings.replace(book.uri, ':', '%3A')}}" class="btn btn-primary">Edit Book</a>
+                                <a th:href="@{'/edit-book/' + ${#uriEncoder.encode(book.uri)}}" class="btn btn-primary">Edit Book</a>
                                 <a href="/books" class="btn btn-outline-secondary ms-2">Back to Books</a>
                             </div>
                         </div>
@@ -68,6 +68,10 @@
                                         <tr>
                                             <th style="width: 150px;">Title</th>
                                             <td th:text="${book.title}">Book Title</td>
+                                        </tr>
+                                        <tr th:if="${#maps.containsKey(book, 'author')}">
+                                            <th>Author</th>
+                                            <td th:text="${book.author}">Author Name</td>
                                         </tr>
                                         <tr>
                                             <th>Themes</th>
@@ -93,6 +97,10 @@
                                                     <span th:unless="${iterStat.last}">&nbsp;</span>
                                                 </span>
                                             </td>
+                                        </tr>
+                                        <tr th:if="${#maps.containsKey(book, 'description')}">
+                                            <th>Description</th>
+                                            <td th:text="${book.description}">Book description goes here...</td>
                                         </tr>
                                     </table>
                                 </div>

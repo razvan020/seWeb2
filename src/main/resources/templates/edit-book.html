@@ -63,10 +63,20 @@
                         <div class="card-body">
                             <div th:if="${error}" class="alert alert-danger" role="alert" th:text="${error}"></div>
 
-                            <form th:action="@{'/edit-book/' + ${#strings.replace(book.uri, ':', '%3A')}}" method="POST">
+                            <form th:action="@{'/edit-book/' + ${#uriEncoder.encode(book.uri)}}" method="POST">
                                 <div class="mb-3">
                                     <label for="title" class="form-label">Title</label>
                                     <input type="text" class="form-control" id="title" name="title" th:value="${book.title}" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="author" class="form-label">Author</label>
+                                    <input type="text" class="form-control" id="author" name="author" th:value="${#maps.containsKey(book, 'author') ? book.author : ''}">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="description" class="form-label">Description</label>
+                                    <textarea class="form-control" id="description" name="description" rows="4" th:text="${#maps.containsKey(book, 'description') ? book.description : ''}"></textarea>
                                 </div>
 
                                 <div class="mb-3">
@@ -94,7 +104,7 @@
                                 <div class="d-flex justify-content-between">
                                     <button type="submit" class="btn btn-primary">Update Book</button>
                                     <div>
-                                        <a th:href="@{'/books/' + ${#strings.replace(book.uri, ':', '%3A')}}" class="btn btn-outline-secondary me-2">Cancel</a>
+                                        <a th:href="@{'/books/' + ${#uriEncoder.encode(book.uri)}}" class="btn btn-outline-secondary me-2">Cancel</a>
                                         <a href="/books" class="btn btn-outline-secondary">Back to Books</a>
                                     </div>
                                 </div>

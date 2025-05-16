@@ -251,9 +251,10 @@ public class RdfService {
 
     // Methods for Exercise 3 and 4
 
-    public void addBook(String title, List<String> themeUris, String readingLevelUri) {
-        // Create a unique URI for the new book
-        String bookUri = "http://example.org/book/" + title.replaceAll("\\s+", "");
+    public void addBook(String title, List<String> themeUris, String readingLevelUri, String description, String author) {
+        // Create a unique ID for the new book (not a full URI)
+        String bookId = title.replaceAll("\\s+", "");
+        String bookUri = "http://example.org/book/" + bookId;
 
         // Create the book resource
         Resource bookResource = currentModel.createResource(bookUri);
@@ -263,6 +264,18 @@ public class RdfService {
 
         // Add rdfs:label
         bookResource.addProperty(RDFS.label, title);
+
+        // Add description if provided
+        if (description != null && !description.isEmpty()) {
+            Property hasDescriptionProperty = currentModel.createProperty("http://example.org/book/hasDescription");
+            bookResource.addProperty(hasDescriptionProperty, description);
+        }
+
+        // Add author if provided
+        if (author != null && !author.isEmpty()) {
+            Property hasAuthorProperty = currentModel.createProperty("http://example.org/book/hasAuthor");
+            bookResource.addProperty(hasAuthorProperty, author);
+        }
 
         // Add themes
         Property hasThemeProperty = currentModel.createProperty("http://example.org/book/hasTheme");
@@ -280,7 +293,7 @@ public class RdfService {
         saveModel();
     }
 
-    public void updateBook(String bookUri, String title, List<String> themeUris, String readingLevelUri) {
+    public void updateBook(String bookUri, String title, List<String> themeUris, String readingLevelUri, String description, String author) {
         // Get the book resource
         Resource bookResource = currentModel.getResource(bookUri);
         if (bookResource == null) {
@@ -293,6 +306,20 @@ public class RdfService {
             bookResource.removeAll(RDFS.label);
         }
         bookResource.addProperty(RDFS.label, title);
+
+        // Update description
+        Property hasDescriptionProperty = currentModel.createProperty("http://example.org/book/hasDescription");
+        bookResource.removeAll(hasDescriptionProperty);
+        if (description != null && !description.isEmpty()) {
+            bookResource.addProperty(hasDescriptionProperty, description);
+        }
+
+        // Update author
+        Property hasAuthorProperty = currentModel.createProperty("http://example.org/book/hasAuthor");
+        bookResource.removeAll(hasAuthorProperty);
+        if (author != null && !author.isEmpty()) {
+            bookResource.addProperty(hasAuthorProperty, author);
+        }
 
         // Update themes
         Property hasThemeProperty = currentModel.createProperty("http://example.org/book/hasTheme");
@@ -336,6 +363,7 @@ public class RdfService {
 
             // Get book URI
             book.put("uri", bookResource.getURI());
+            book.put("id", bookResource.getLocalName());
 
             // Get book title
             Statement labelStmt = bookResource.getProperty(RDFS.label);
@@ -343,6 +371,25 @@ public class RdfService {
                 book.put("title", labelStmt.getString());
             } else {
                 book.put("title", bookResource.getLocalName());
+            }
+
+            // Get book author
+            Property hasAuthorProperty = currentModel.createProperty("http://example.org/book/hasAuthor");
+            Statement authorStmt = bookResource.getProperty(hasAuthorProperty);
+            if (authorStmt != null) {
+                book.put("author", authorStmt.getString());
+            }
+
+            // Get book description (short preview for list)
+            Property hasDescriptionProperty = currentModel.createProperty("http://example.org/book/hasDescription");
+            Statement descriptionStmt = bookResource.getProperty(hasDescriptionProperty);
+            if (descriptionStmt != null) {
+                String description = descriptionStmt.getString();
+                // Truncate description for preview if it's too long
+                if (description.length() > 100) {
+                    description = description.substring(0, 97) + "...";
+                }
+                book.put("description", description);
             }
 
             // Get book themes
@@ -407,6 +454,20 @@ public class RdfService {
             book.put("title", labelStmt.getString());
         } else {
             book.put("title", bookResource.getLocalName());
+        }
+
+        // Get book description
+        Property hasDescriptionProperty = currentModel.createProperty("http://example.org/book/hasDescription");
+        Statement descriptionStmt = bookResource.getProperty(hasDescriptionProperty);
+        if (descriptionStmt != null) {
+            book.put("description", descriptionStmt.getString());
+        }
+
+        // Get book author
+        Property hasAuthorProperty = currentModel.createProperty("http://example.org/book/hasAuthor");
+        Statement authorStmt = bookResource.getProperty(hasAuthorProperty);
+        if (authorStmt != null) {
+            book.put("author", authorStmt.getString());
         }
 
         // Get book themes

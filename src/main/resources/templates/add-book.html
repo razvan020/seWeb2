@@ -70,6 +70,16 @@
                                 </div>
 
                                 <div class="mb-3">
+                                    <label for="author" class="form-label">Author</label>
+                                    <input type="text" class="form-control" id="author" name="author">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="description" class="form-label">Description</label>
+                                    <textarea class="form-control" id="description" name="description" rows="4"></textarea>
+                                </div>
+
+                                <div class="mb-3">
                                     <label for="themes" class="form-label">Themes</label>
                                     <select class="form-select" id="themes" name="themes" multiple required>
                                         <option th:each="theme : ${themes}" 

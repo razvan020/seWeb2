@@ -94,6 +94,11 @@
     <book:hasTheme rdf:resource="http://example.org/book/Mystery"/>
     <rdfs:label>The Silent Patient</rdfs:label>
   </book:Book>
+  <book:Book rdf:about="http://example.org/book/Sutton">
+    <rdfs:label>Sutton</rdfs:label>
+    <book:hasTheme rdf:resource="http://example.org/book/Mystery"/>
+    <book:hasReadingLevel rdf:resource="http://example.org/book/Intermediate"/>
+  </book:Book>
   <book:Book rdf:about="http://example.org/book/Dune">
     <book:hasReadingLevel>
       <book:ReadingLevel rdf:about="http://example.org/book/Advanced">
@@ -105,6 +110,9 @@
     <rdfs:label>Dune</rdfs:label>
   </book:Book>
   <book:Book rdf:about="http://example.org/book/HarryPotter">
+    <book:hasTheme rdf:resource="http://example.org/book/Murder"/>
+    <book:hasAuthor>J.K Rolling</book:hasAuthor>
+    <book:hasDescription>Best book</book:hasDescription>
     <book:hasReadingLevel rdf:resource="http://example.org/book/Intermediate"/>
     <book:hasTheme rdf:resource="http://example.org/book/Fantasy"/>
     <rdfs:label>Harry Potter</rdfs:label>

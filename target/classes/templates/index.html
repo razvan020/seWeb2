@@ -55,6 +55,9 @@
                             <h2>Welcome to the Book Recommendation System</h2>
                         </div>
                         <div class="card-body">
+                            <div th:if="${message}" class="alert alert-success" role="alert" th:text="${message}"></div>
+                            <div th:if="${error}" class="alert alert-danger" role="alert" th:text="${error}"></div>
+
                             <p>This system helps you find books based on your preferences and reading level.</p>
                             <p>Features:</p>
                             <ul>

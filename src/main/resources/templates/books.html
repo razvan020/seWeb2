@@ -57,6 +57,7 @@
                         </div>
                         <div class="card-body">
                             <div th:if="${message}" class="alert alert-success" role="alert" th:text="${message}"></div>
+                            <div th:if="${error}" class="alert alert-danger" role="alert" th:text="${error}"></div>
 
                             <div th:if="${books.empty}" class="alert alert-info">
                                 No books found. <a href="/add-book">Add a book</a> to get started.
@@ -67,6 +68,9 @@
                                     <div class="card h-100">
                                         <div class="card-body">
                                             <h5 class="card-title" th:text="${book.title}">Book Title</h5>
+                                            <p class="card-text" th:if="${#maps.containsKey(book, 'author')}">
+                                                <strong>Author:</strong> <span th:text="${book.author}">Author Name</span>
+                                            </p>
                                             <p class="card-text">
                                                 <strong>Themes:</strong>
                                                 <span th:each="theme, iterStat : ${book.themes}">
@@ -79,10 +83,13 @@
                                                 <span th:if="${book.readingLevel}" th:text="${book.readingLevel.name}">Reading Level</span>
                                                 <span th:unless="${book.readingLevel}">Not specified</span>
                                             </p>
+                                            <p class="card-text" th:if="${#maps.containsKey(book, 'description')}">
+                                                <span th:text="${book.description}">Book description preview...</span>
+                                            </p>
                                         </div>
                                         <div class="card-footer">
-                                            <a th:href="@{'/books/' + ${#strings.replace(book.uri, ':', '%3A')}}" class="btn btn-outline-primary">View Details</a>
-                                            <a th:href="@{'/edit-book/' + ${#strings.replace(book.uri, ':', '%3A')}}" class="btn btn-outline-secondary">Edit</a>
+                                            <a th:href="@{'/books/' + ${book.id}}" class="btn btn-outline-primary">View Details</a>
+                                            <a th:href="@{'/edit-book/' + ${book.id}}" class="btn btn-outline-secondary">Edit</a>
                                         </div>
                                     </div>
                                 </div>
