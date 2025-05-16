@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Books - Book Recommendation System</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="py-4">
+            <h1 class="text-center">Book Recommendation System</h1>
+            <nav class="navbar navbar-expand-lg navbar-light bg-light rounded mt-3">
+                <div class="container-fluid">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav me-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="/">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" href="/books">Books</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/rdf-upload">RDF Upload</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/add-book">Add Book</a>
+                            </li>
+                        </ul>
+                        <div class="d-flex">
+                            <div class="dropdown">
+                                <button class="btn btn-outline-primary dropdown-toggle" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Select User
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="userDropdown">
+                                    <li><a class="dropdown-item" href="#" onclick="selectUser('Alice')">Alice (Intermediate, Science Fiction)</a></li>
+                                    <li><a class="dropdown-item" href="#" onclick="selectUser('Bob')">Bob (Beginner, Mystery)</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <main class="py-4">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h2>Books</h2>
+                            <a href="/add-book" class="btn btn-primary">Add New Book</a>
+                        </div>
+                        <div class="card-body">
+                            <div th:if="${message}" class="alert alert-success" role="alert" th:text="${message}"></div>
+
+                            <div th:if="${books.empty}" class="alert alert-info">
+                                No books found. <a href="/add-book">Add a book</a> to get started.
+                            </div>
+
+                            <div th:unless="${books.empty}" class="row row-cols-1 row-cols-md-3 g-4">
+                                <div th:each="book : ${books}" class="col">
+                                    <div class="card h-100">
+                                        <div class="card-body">
+                                            <h5 class="card-title" th:text="${book.title}">Book Title</h5>
+                                            <p class="card-text">
+                                                <strong>Themes:</strong>
+                                                <span th:each="theme, iterStat : ${book.themes}">
+                                                    <span th:text="${theme.name}">Theme</span>
+                                                    <span th:unless="${iterStat.last}">, </span>
+                                                </span>
+                                            </p>
+                                            <p class="card-text">
+                                                <strong>Reading Level:</strong>
+                                                <span th:if="${book.readingLevel}" th:text="${book.readingLevel.name}">Reading Level</span>
+                                                <span th:unless="${book.readingLevel}">Not specified</span>
+                                            </p>
+                                        </div>
+                                        <div class="card-footer">
+                                            <a th:href="@{'/books/' + ${#strings.replace(book.uri, ':', '%3A')}}" class="btn btn-outline-primary">View Details</a>
+                                            <a th:href="@{'/edit-book/' + ${#strings.replace(book.uri, ':', '%3A')}}" class="btn btn-outline-secondary">Edit</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="py-3 mt-4 text-center border-top">
+            <p>&copy; 2025 Book Recommendation System</p>
+        </footer>
+    </div>
+
+    <!-- Chat Widget (will be implemented later) -->
+    <div id="chat-widget" class="chat-widget">
+        <!-- Chat content will be added here -->
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/chatbot.js"></script>
+</body>
+</html>

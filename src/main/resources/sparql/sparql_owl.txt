@@ -1,0 +1,87 @@
+# SPARQL Queries for Book Recommendation Ontology
+
+# Query 1: List all books with their titles and reading levels
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX : <http://example.org/book-recommendation-ontology#>
+
+SELECT ?book ?title ?readingLevel
+WHERE {
+  ?book rdf:type :Book .
+  ?book :hasTitle ?title .
+  ?book :hasReadingLevel ?readingLevelInd .
+  ?readingLevelInd rdf:type :ReadingLevel .
+  ?readingLevelInd rdfs:label ?readingLevel .
+}
+ORDER BY ?title
+
+# Query 2: Find books recommended for a specific user (Alice)
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX : <http://example.org/book-recommendation-ontology#>
+
+SELECT ?book ?title
+WHERE {
+  ?book rdf:type :Book .
+  ?book :hasTitle ?title .
+  ?book :isRecommendedFor :Alice .
+}
+ORDER BY ?title
+
+# Query 3: Find books that match a user's preferred theme and reading level
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX : <http://example.org/book-recommendation-ontology#>
+
+SELECT ?user ?userName ?book ?bookTitle
+WHERE {
+  ?user rdf:type :User .
+  ?user :hasName ?userName .
+  ?user :prefersTheme ?theme .
+  ?user :hasUserReadingLevel ?level .
+  
+  ?book rdf:type :Book .
+  ?book :hasTitle ?bookTitle .
+  ?book :hasTheme ?theme .
+  ?book :hasReadingLevel ?level .
+}
+ORDER BY ?userName ?bookTitle
+
+# Query 4: Count the number of books by theme
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX : <http://example.org/book-recommendation-ontology#>
+
+SELECT ?theme (COUNT(?book) AS ?bookCount)
+WHERE {
+  ?theme rdf:type :Theme .
+  ?book rdf:type :Book .
+  ?book :hasTheme ?theme .
+}
+GROUP BY ?theme
+ORDER BY DESC(?bookCount)
+
+# Query 5: Find books that have multiple themes
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX : <http://example.org/book-recommendation-ontology#>
+
+SELECT ?book ?title (COUNT(?theme) AS ?themeCount)
+WHERE {
+  ?book rdf:type :Book .
+  ?book :hasTitle ?title .
+  ?book :hasTheme ?theme .
+}
+GROUP BY ?book ?title
+HAVING (?themeCount > 1)
+ORDER BY DESC(?themeCount)

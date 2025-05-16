@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF
+   xmlns:ex="http://example.org/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+>
+  <rdf:Description rdf:about="http://example.org/SilentPatient">
+    <rdf:type rdf:resource="http://example.org/Book"/>
+    <rdfs:label>The Silent Patient</rdfs:label>
+    <ex:belongsToTheme>MysteryMurder</ex:belongsToTheme>
+    <ex:suitableForLevel>Intermediate</ex:suitableForLevel>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/suitableForLevel">
+    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/Dune">
+    <rdf:type rdf:resource="http://example.org/Book"/>
+    <rdfs:label>Dune</rdfs:label>
+    <ex:belongsToTheme>ScienceFictionFantasy</ex:belongsToTheme>
+    <ex:suitableForLevel>Advanced</ex:suitableForLevel>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/readingLevel">
+    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/Bob">
+    <rdf:type rdf:resource="http://example.org/User"/>
+    <ex:readingLevel rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Beginner</ex:readingLevel>
+    <ex:prefersTheme rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Mystery</ex:prefersTheme>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/HungerGames">
+    <rdf:type rdf:resource="http://example.org/Book"/>
+    <rdfs:label>Hunger Games</rdfs:label>
+    <ex:belongsToTheme>ScienceFictionFantasy</ex:belongsToTheme>
+    <ex:suitableForLevel>Beginner</ex:suitableForLevel>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/HarryPotter">
+    <rdf:type rdf:resource="http://example.org/Book"/>
+    <rdfs:label>Harry Potter</rdfs:label>
+    <ex:belongsToTheme>Action</ex:belongsToTheme>
+    <ex:suitableForLevel>2</ex:suitableForLevel>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/User">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/Book">
+    <rdf:type rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/Alice">
+    <rdf:type rdf:resource="http://example.org/User"/>
+    <ex:readingLevel rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Intermediate</ex:readingLevel>
+    <ex:prefersTheme rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ScienceFiction</ex:prefersTheme>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/prefersTheme">
+    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/belongsToTheme">
+    <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+  </rdf:Description>
+</rdf:RDF>

@@ -1,0 +1,140 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+         xmlns:book="http://example.org/book/"
+         xmlns:user="http://example.org/user/">
+
+    <!-- Define Classes -->
+    <rdfs:Class rdf:about="http://example.org/book/Book">
+        <rdfs:label>Book</rdfs:label>
+        <rdfs:comment>A book in the recommendation system</rdfs:comment>
+    </rdfs:Class>
+    
+    <rdfs:Class rdf:about="http://example.org/user/User">
+        <rdfs:label>User</rdfs:label>
+        <rdfs:comment>A user of the recommendation system</rdfs:comment>
+    </rdfs:Class>
+    
+    <rdfs:Class rdf:about="http://example.org/book/Theme">
+        <rdfs:label>Theme</rdfs:label>
+        <rdfs:comment>A book theme or genre</rdfs:comment>
+    </rdfs:Class>
+    
+    <rdfs:Class rdf:about="http://example.org/book/ReadingLevel">
+        <rdfs:label>ReadingLevel</rdfs:label>
+        <rdfs:comment>Reading level of a book</rdfs:comment>
+    </rdfs:Class>
+    
+    <!-- Define Properties -->
+    <rdf:Property rdf:about="http://example.org/book/hasTheme">
+        <rdfs:label>hasTheme</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/book/Book"/>
+        <rdfs:range rdf:resource="http://example.org/book/Theme"/>
+    </rdf:Property>
+    
+    <rdf:Property rdf:about="http://example.org/book/hasReadingLevel">
+        <rdfs:label>hasReadingLevel</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/book/Book"/>
+        <rdfs:range rdf:resource="http://example.org/book/ReadingLevel"/>
+    </rdf:Property>
+    
+    <rdf:Property rdf:about="http://example.org/user/prefersTheme">
+        <rdfs:label>prefersTheme</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/user/User"/>
+        <rdfs:range rdf:resource="http://example.org/book/Theme"/>
+    </rdf:Property>
+    
+    <rdf:Property rdf:about="http://example.org/user/hasReadingLevel">
+        <rdfs:label>hasReadingLevel</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/user/User"/>
+        <rdfs:range rdf:resource="http://example.org/book/ReadingLevel"/>
+    </rdf:Property>
+    
+    <rdf:Property rdf:about="http://example.org/book/isRecommendedFor">
+        <rdfs:label>isRecommendedFor</rdfs:label>
+        <rdfs:domain rdf:resource="http://example.org/book/Book"/>
+        <rdfs:range rdf:resource="http://example.org/user/User"/>
+    </rdf:Property>
+    
+    <!-- Define Reading Levels -->
+    <book:ReadingLevel rdf:about="http://example.org/book/Beginner">
+        <rdfs:label>Beginner</rdfs:label>
+    </book:ReadingLevel>
+    
+    <book:ReadingLevel rdf:about="http://example.org/book/Intermediate">
+        <rdfs:label>Intermediate</rdfs:label>
+    </book:ReadingLevel>
+    
+    <book:ReadingLevel rdf:about="http://example.org/book/Advanced">
+        <rdfs:label>Advanced</rdfs:label>
+    </book:ReadingLevel>
+    
+    <!-- Define Themes -->
+    <book:Theme rdf:about="http://example.org/book/ScienceFiction">
+        <rdfs:label>Science Fiction</rdfs:label>
+    </book:Theme>
+    
+    <book:Theme rdf:about="http://example.org/book/Fantasy">
+        <rdfs:label>Fantasy</rdfs:label>
+    </book:Theme>
+    
+    <book:Theme rdf:about="http://example.org/book/Mystery">
+        <rdfs:label>Mystery</rdfs:label>
+    </book:Theme>
+    
+    <book:Theme rdf:about="http://example.org/book/Murder">
+        <rdfs:label>Murder</rdfs:label>
+    </book:Theme>
+    
+    <!-- Define Users -->
+    <user:User rdf:about="http://example.org/user/Alice">
+        <rdfs:label>Alice</rdfs:label>
+        <user:hasReadingLevel rdf:resource="http://example.org/book/Intermediate"/>
+        <user:prefersTheme rdf:resource="http://example.org/book/ScienceFiction"/>
+    </user:User>
+    
+    <user:User rdf:about="http://example.org/user/Bob">
+        <rdfs:label>Bob</rdfs:label>
+        <user:hasReadingLevel rdf:resource="http://example.org/book/Beginner"/>
+        <user:prefersTheme rdf:resource="http://example.org/book/Mystery"/>
+    </user:User>
+    
+    <!-- Define Books -->
+    <book:Book rdf:about="http://example.org/book/Dune">
+        <rdfs:label>Dune</rdfs:label>
+        <book:hasTheme rdf:resource="http://example.org/book/ScienceFiction"/>
+        <book:hasTheme rdf:resource="http://example.org/book/Fantasy"/>
+        <book:hasReadingLevel rdf:resource="http://example.org/book/Advanced"/>
+    </book:Book>
+    
+    <book:Book rdf:about="http://example.org/book/TheSilentPatient">
+        <rdfs:label>The Silent Patient</rdfs:label>
+        <book:hasTheme rdf:resource="http://example.org/book/Mystery"/>
+        <book:hasTheme rdf:resource="http://example.org/book/Murder"/>
+        <book:hasReadingLevel rdf:resource="http://example.org/book/Intermediate"/>
+        <book:isRecommendedFor rdf:resource="http://example.org/user/Alice"/>
+    </book:Book>
+    
+    <book:Book rdf:about="http://example.org/book/HungerGames">
+        <rdfs:label>Hunger Games</rdfs:label>
+        <book:hasTheme rdf:resource="http://example.org/book/ScienceFiction"/>
+        <book:hasTheme rdf:resource="http://example.org/book/Fantasy"/>
+        <book:hasReadingLevel rdf:resource="http://example.org/book/Beginner"/>
+        <book:isRecommendedFor rdf:resource="http://example.org/user/Bob"/>
+    </book:Book>
+    
+    <!-- Recommendation Rules (expressed as RDF statements) -->
+    <!-- A book is recommended for a user if:
+         1. It belongs to the user's preferred theme
+         2. It matches the user's reading level
+         
+         These rules are expressed through the isRecommendedFor property above.
+         For example, "The Silent Patient" is recommended for Alice because:
+         - Alice prefers Mystery (one of the book's themes)
+         - Alice has Intermediate reading level (matching the book's level)
+         
+         Similarly, "Hunger Games" is recommended for Bob because:
+         - Bob prefers Science Fiction (one of the book's themes)
+         - Bob has Beginner reading level (matching the book's level)
+    -->
+</rdf:RDF>

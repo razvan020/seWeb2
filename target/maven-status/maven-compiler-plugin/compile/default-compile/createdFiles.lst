@@ -1,0 +1,9 @@
+com\example\bookrecommendation\service\ChatbotService.class
+com\example\bookrecommendation\model\ChatMessage.class
+com\example\bookrecommendation\controller\ChatbotController.class
+com\example\bookrecommendation\controller\BookController.class
+com\example\bookrecommendation\service\RdfService.class
+com\example\bookrecommendation\controller\RdfController.class
+com\example\bookrecommendation\BookRecommendationApplication.class
+com\example\bookrecommendation\service\ChatbotService$BookAssistant.class
+com\example\bookrecommendation\controller\HomeController.class

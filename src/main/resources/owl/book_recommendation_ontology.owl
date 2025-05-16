@@ -1,0 +1,345 @@
+<?xml version="1.0"?>
+<Ontology xmlns="http://www.w3.org/2002/07/owl#"
+     xml:base="http://example.org/book-recommendation-ontology"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     ontologyIRI="http://example.org/book-recommendation-ontology">
+    <Prefix name="" IRI="http://example.org/book-recommendation-ontology#"/>
+    <Prefix name="owl" IRI="http://www.w3.org/2002/07/owl#"/>
+    <Prefix name="rdf" IRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#"/>
+    <Prefix name="xml" IRI="http://www.w3.org/XML/1998/namespace"/>
+    <Prefix name="xsd" IRI="http://www.w3.org/2001/XMLSchema#"/>
+    <Prefix name="rdfs" IRI="http://www.w3.org/2000/01/rdf-schema#"/>
+    
+    <!-- Classes -->
+    <Declaration>
+        <Class IRI="#Book"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#User"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Theme"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ReadingLevel"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#RecommendedBook"/>
+    </Declaration>
+    
+    <!-- Object Properties -->
+    <Declaration>
+        <ObjectProperty IRI="#hasTheme"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasReadingLevel"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#prefersTheme"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasUserReadingLevel"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#isRecommendedFor"/>
+    </Declaration>
+    
+    <!-- Data Properties -->
+    <Declaration>
+        <DataProperty IRI="#hasTitle"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasName"/>
+    </Declaration>
+    
+    <!-- Domain and Range Definitions -->
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#hasTheme"/>
+        <Class IRI="#Book"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#hasTheme"/>
+        <Class IRI="#Theme"/>
+    </ObjectPropertyRange>
+    
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#hasReadingLevel"/>
+        <Class IRI="#Book"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#hasReadingLevel"/>
+        <Class IRI="#ReadingLevel"/>
+    </ObjectPropertyRange>
+    
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#prefersTheme"/>
+        <Class IRI="#User"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#prefersTheme"/>
+        <Class IRI="#Theme"/>
+    </ObjectPropertyRange>
+    
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#hasUserReadingLevel"/>
+        <Class IRI="#User"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#hasUserReadingLevel"/>
+        <Class IRI="#ReadingLevel"/>
+    </ObjectPropertyRange>
+    
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#isRecommendedFor"/>
+        <Class IRI="#Book"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#isRecommendedFor"/>
+        <Class IRI="#User"/>
+    </ObjectPropertyRange>
+    
+    <DataPropertyDomain>
+        <DataProperty IRI="#hasTitle"/>
+        <Class IRI="#Book"/>
+    </DataPropertyDomain>
+    <DataPropertyRange>
+        <DataProperty IRI="#hasTitle"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    
+    <DataPropertyDomain>
+        <DataProperty IRI="#hasName"/>
+        <Class IRI="#User"/>
+    </DataPropertyDomain>
+    <DataPropertyRange>
+        <DataProperty IRI="#hasName"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    
+    <!-- Individuals -->
+    <Declaration>
+        <NamedIndividual IRI="#Beginner"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Intermediate"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Advanced"/>
+    </Declaration>
+    
+    <Declaration>
+        <NamedIndividual IRI="#ScienceFiction"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Fantasy"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Mystery"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Murder"/>
+    </Declaration>
+    
+    <Declaration>
+        <NamedIndividual IRI="#Alice"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Bob"/>
+    </Declaration>
+    
+    <Declaration>
+        <NamedIndividual IRI="#Dune"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#TheSilentPatient"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#HungerGames"/>
+    </Declaration>
+    
+    <!-- Class Assertions -->
+    <ClassAssertion>
+        <Class IRI="#ReadingLevel"/>
+        <NamedIndividual IRI="#Beginner"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ReadingLevel"/>
+        <NamedIndividual IRI="#Intermediate"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ReadingLevel"/>
+        <NamedIndividual IRI="#Advanced"/>
+    </ClassAssertion>
+    
+    <ClassAssertion>
+        <Class IRI="#Theme"/>
+        <NamedIndividual IRI="#ScienceFiction"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Theme"/>
+        <NamedIndividual IRI="#Fantasy"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Theme"/>
+        <NamedIndividual IRI="#Mystery"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Theme"/>
+        <NamedIndividual IRI="#Murder"/>
+    </ClassAssertion>
+    
+    <ClassAssertion>
+        <Class IRI="#User"/>
+        <NamedIndividual IRI="#Alice"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#User"/>
+        <NamedIndividual IRI="#Bob"/>
+    </ClassAssertion>
+    
+    <ClassAssertion>
+        <Class IRI="#Book"/>
+        <NamedIndividual IRI="#Dune"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Book"/>
+        <NamedIndividual IRI="#TheSilentPatient"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Book"/>
+        <NamedIndividual IRI="#HungerGames"/>
+    </ClassAssertion>
+    
+    <!-- Property Assertions -->
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasName"/>
+        <NamedIndividual IRI="#Alice"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">Alice</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasName"/>
+        <NamedIndividual IRI="#Bob"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">Bob</Literal>
+    </DataPropertyAssertion>
+    
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasTitle"/>
+        <NamedIndividual IRI="#Dune"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">Dune</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasTitle"/>
+        <NamedIndividual IRI="#TheSilentPatient"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">The Silent Patient</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasTitle"/>
+        <NamedIndividual IRI="#HungerGames"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">Hunger Games</Literal>
+    </DataPropertyAssertion>
+    
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasUserReadingLevel"/>
+        <NamedIndividual IRI="#Alice"/>
+        <NamedIndividual IRI="#Intermediate"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#prefersTheme"/>
+        <NamedIndividual IRI="#Alice"/>
+        <NamedIndividual IRI="#ScienceFiction"/>
+    </ObjectPropertyAssertion>
+    
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasUserReadingLevel"/>
+        <NamedIndividual IRI="#Bob"/>
+        <NamedIndividual IRI="#Beginner"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#prefersTheme"/>
+        <NamedIndividual IRI="#Bob"/>
+        <NamedIndividual IRI="#Mystery"/>
+    </ObjectPropertyAssertion>
+    
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasTheme"/>
+        <NamedIndividual IRI="#Dune"/>
+        <NamedIndividual IRI="#ScienceFiction"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasTheme"/>
+        <NamedIndividual IRI="#Dune"/>
+        <NamedIndividual IRI="#Fantasy"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasReadingLevel"/>
+        <NamedIndividual IRI="#Dune"/>
+        <NamedIndividual IRI="#Advanced"/>
+    </ObjectPropertyAssertion>
+    
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasTheme"/>
+        <NamedIndividual IRI="#TheSilentPatient"/>
+        <NamedIndividual IRI="#Mystery"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasTheme"/>
+        <NamedIndividual IRI="#TheSilentPatient"/>
+        <NamedIndividual IRI="#Murder"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasReadingLevel"/>
+        <NamedIndividual IRI="#TheSilentPatient"/>
+        <NamedIndividual IRI="#Intermediate"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#isRecommendedFor"/>
+        <NamedIndividual IRI="#TheSilentPatient"/>
+        <NamedIndividual IRI="#Alice"/>
+    </ObjectPropertyAssertion>
+    
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasTheme"/>
+        <NamedIndividual IRI="#HungerGames"/>
+        <NamedIndividual IRI="#ScienceFiction"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasTheme"/>
+        <NamedIndividual IRI="#HungerGames"/>
+        <NamedIndividual IRI="#Fantasy"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasReadingLevel"/>
+        <NamedIndividual IRI="#HungerGames"/>
+        <NamedIndividual IRI="#Beginner"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#isRecommendedFor"/>
+        <NamedIndividual IRI="#HungerGames"/>
+        <NamedIndividual IRI="#Bob"/>
+    </ObjectPropertyAssertion>
+    
+    <!-- Recommendation Rule Definition -->
+    <EquivalentClasses>
+        <Class IRI="#RecommendedBook"/>
+        <ObjectIntersectionOf>
+            <Class IRI="#Book"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasTheme"/>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty IRI="#prefersTheme"/>
+                    <Class IRI="#User"/>
+                </ObjectSomeValuesFrom>
+            </ObjectSomeValuesFrom>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="#hasReadingLevel"/>
+                <ObjectSomeValuesFrom>
+                    <ObjectProperty IRI="#hasUserReadingLevel"/>
+                    <Class IRI="#User"/>
+                </ObjectSomeValuesFrom>
+            </ObjectSomeValuesFrom>
+        </ObjectIntersectionOf>
+    </EquivalentClasses>
+</Ontology>
