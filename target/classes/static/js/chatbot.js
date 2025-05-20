@@ -27,6 +27,12 @@ function initChatbot() {
 
     // Set the current context based on the page
     setContextFromPage();
+
+    // Make sure the chat toggle is always visible
+    const chatToggle = document.querySelector('.chat-toggle');
+    if (chatToggle) {
+        chatToggle.style.display = 'flex';
+    }
 }
 
 function generateSessionId() {
@@ -46,10 +52,8 @@ function createChatToggle() {
         const chatWidget = document.getElementById('chat-widget');
         if (chatWidget.style.display === 'flex') {
             chatWidget.style.display = 'none';
-            chatToggle.style.display = 'flex'; // Show the toggle button
         } else {
             chatWidget.style.display = 'flex';
-            chatToggle.style.display = 'none'; // Hide the toggle button when chat is open
             // Focus on the input field
             const chatInput = document.querySelector('.chat-input');
             if (chatInput) chatInput.focus();
@@ -82,11 +86,6 @@ function initChatWidgetStructure(chatWidget) {
     const closeBtn = chatWidget.querySelector('.close-btn');
     closeBtn.addEventListener('click', function() {
         chatWidget.style.display = 'none';
-        // Show the toggle button when chat is closed
-        const chatToggle = document.querySelector('.chat-toggle');
-        if (chatToggle) {
-            chatToggle.style.display = 'flex';
-        }
     });
 
     const sendBtn = chatWidget.querySelector('.chat-send-btn');
@@ -182,8 +181,14 @@ function sendMessage(message) {
         chatMessages.scrollTop = chatMessages.scrollHeight;
     })
     .catch(error => {
-        // Remove loading indicator
-        chatMessages.removeChild(loadingDiv);
+        // Remove loading indicator if it's still in the DOM
+        try {
+            if (loadingDiv.parentNode === chatMessages) {
+                chatMessages.removeChild(loadingDiv);
+            }
+        } catch (e) {
+            console.error('Error removing loading indicator:', e);
+        }
 
         // Add error message
         const errorDiv = document.createElement('div');

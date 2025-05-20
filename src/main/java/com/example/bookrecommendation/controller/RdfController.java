@@ -1,6 +1,7 @@
 package com.example.bookrecommendation.controller;
 
 import com.example.bookrecommendation.service.RdfService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -21,7 +22,12 @@ public class RdfController {
     }
 
     @GetMapping("/rdf-upload")
-    public String showUploadForm() {
+    public String showUploadForm(Model model, HttpSession session) {
+        // Add the current user to the model
+        String currentUser = (String) session.getAttribute("currentUser");
+        if (currentUser != null) {
+            model.addAttribute("currentUser", currentUser);
+        }
         return "rdf-upload";
     }
 
@@ -38,8 +44,15 @@ public class RdfController {
     }
 
     @GetMapping("/rdf-visualization")
-    public String showVisualization(Model model) {
+    public String showVisualization(Model model, HttpSession session) {
         model.addAttribute("rdfContent", rdfService.modelToString());
+
+        // Add the current user to the model
+        String currentUser = (String) session.getAttribute("currentUser");
+        if (currentUser != null) {
+            model.addAttribute("currentUser", currentUser);
+        }
+
         return "rdf-visualization";
     }
 

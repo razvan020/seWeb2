@@ -1,0 +1,120 @@
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:user="http://example.org/user/"
+    xmlns:book="http://example.org/book/"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+  <rdfs:Class rdf:about="http://example.org/book/Book">
+    <rdfs:comment>A book in the recommendation system</rdfs:comment>
+    <rdfs:label>Book</rdfs:label>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://example.org/book/Theme">
+    <rdfs:comment>A book theme or genre</rdfs:comment>
+    <rdfs:label>Theme</rdfs:label>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://example.org/user/User">
+    <rdfs:comment>A user of the recommendation system</rdfs:comment>
+    <rdfs:label>User</rdfs:label>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://example.org/book/ReadingLevel">
+    <rdfs:comment>Reading level of a book</rdfs:comment>
+    <rdfs:label>ReadingLevel</rdfs:label>
+  </rdfs:Class>
+  <rdf:Property rdf:about="http://example.org/user/hasReadingLevel">
+    <rdfs:range rdf:resource="http://example.org/book/ReadingLevel"/>
+    <rdfs:domain rdf:resource="http://example.org/user/User"/>
+    <rdfs:label>hasReadingLevel</rdfs:label>
+  </rdf:Property>
+  <rdf:Property rdf:about="http://example.org/book/isRecommendedFor">
+    <rdfs:range rdf:resource="http://example.org/user/User"/>
+    <rdfs:domain rdf:resource="http://example.org/book/Book"/>
+    <rdfs:label>isRecommendedFor</rdfs:label>
+  </rdf:Property>
+  <rdf:Property rdf:about="http://example.org/user/prefersTheme">
+    <rdfs:range rdf:resource="http://example.org/book/Theme"/>
+    <rdfs:domain rdf:resource="http://example.org/user/User"/>
+    <rdfs:label>prefersTheme</rdfs:label>
+  </rdf:Property>
+  <rdf:Property rdf:about="http://example.org/book/hasTheme">
+    <rdfs:range rdf:resource="http://example.org/book/Theme"/>
+    <rdfs:domain rdf:resource="http://example.org/book/Book"/>
+    <rdfs:label>hasTheme</rdfs:label>
+  </rdf:Property>
+  <rdf:Property rdf:about="http://example.org/book/hasReadingLevel">
+    <rdfs:range rdf:resource="http://example.org/book/ReadingLevel"/>
+    <rdfs:domain rdf:resource="http://example.org/book/Book"/>
+    <rdfs:label>hasReadingLevel</rdfs:label>
+  </rdf:Property>
+  <book:Book rdf:about="http://example.org/book/HungerGames">
+    <book:isRecommendedFor>
+      <user:User rdf:about="http://example.org/user/Bob">
+        <user:prefersTheme>
+          <book:Theme rdf:about="http://example.org/book/Mystery">
+            <rdfs:label>Mystery</rdfs:label>
+          </book:Theme>
+        </user:prefersTheme>
+        <user:hasReadingLevel>
+          <book:ReadingLevel rdf:about="http://example.org/book/Beginner">
+            <rdfs:label>Beginner</rdfs:label>
+          </book:ReadingLevel>
+        </user:hasReadingLevel>
+        <rdfs:label>Bob</rdfs:label>
+      </user:User>
+    </book:isRecommendedFor>
+    <book:hasReadingLevel rdf:resource="http://example.org/book/Beginner"/>
+    <book:hasTheme>
+      <book:Theme rdf:about="http://example.org/book/Fantasy">
+        <rdfs:label>Fantasy</rdfs:label>
+      </book:Theme>
+    </book:hasTheme>
+    <book:hasTheme>
+      <book:Theme rdf:about="http://example.org/book/ScienceFiction">
+        <rdfs:label>Science Fiction</rdfs:label>
+      </book:Theme>
+    </book:hasTheme>
+    <rdfs:label>Hunger Games</rdfs:label>
+  </book:Book>
+  <book:Book rdf:about="http://example.org/book/TheSilentPatient">
+    <book:isRecommendedFor>
+      <user:User rdf:about="http://example.org/user/Alice">
+        <user:prefersTheme rdf:resource="http://example.org/book/ScienceFiction"/>
+        <user:hasReadingLevel>
+          <book:ReadingLevel rdf:about="http://example.org/book/Intermediate">
+            <rdfs:label>Intermediate</rdfs:label>
+          </book:ReadingLevel>
+        </user:hasReadingLevel>
+        <rdfs:label>Alice</rdfs:label>
+      </user:User>
+    </book:isRecommendedFor>
+    <book:hasReadingLevel rdf:resource="http://example.org/book/Intermediate"/>
+    <book:hasTheme>
+      <book:Theme rdf:about="http://example.org/book/Murder">
+        <rdfs:label>Murder</rdfs:label>
+      </book:Theme>
+    </book:hasTheme>
+    <book:hasTheme rdf:resource="http://example.org/book/Mystery"/>
+    <rdfs:label>The Silent Patient</rdfs:label>
+  </book:Book>
+  <book:Book rdf:about="http://example.org/book/Sutton">
+    <rdfs:label>Sutton</rdfs:label>
+    <book:hasTheme rdf:resource="http://example.org/book/Mystery"/>
+    <book:hasReadingLevel rdf:resource="http://example.org/book/Intermediate"/>
+  </book:Book>
+  <book:Book rdf:about="http://example.org/book/Dune">
+    <book:hasReadingLevel>
+      <book:ReadingLevel rdf:about="http://example.org/book/Advanced">
+        <rdfs:label>Advanced</rdfs:label>
+      </book:ReadingLevel>
+    </book:hasReadingLevel>
+    <book:hasTheme rdf:resource="http://example.org/book/Fantasy"/>
+    <book:hasTheme rdf:resource="http://example.org/book/ScienceFiction"/>
+    <rdfs:label>Dune</rdfs:label>
+  </book:Book>
+  <book:Book rdf:about="http://example.org/book/HarryPotter">
+    <book:hasTheme rdf:resource="http://example.org/book/Murder"/>
+    <book:hasAuthor>J.K Rolling</book:hasAuthor>
+    <book:hasDescription>Best book</book:hasDescription>
+    <book:hasReadingLevel rdf:resource="http://example.org/book/Intermediate"/>
+    <book:hasTheme rdf:resource="http://example.org/book/Fantasy"/>
+    <rdfs:label>Harry Potter</rdfs:label>
+  </book:Book>
+</rdf:RDF>

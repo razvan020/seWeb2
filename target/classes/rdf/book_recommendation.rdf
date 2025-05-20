@@ -1,5 +1,6 @@
 <rdf:RDF
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
     xmlns:user="http://example.org/user/"
     xmlns:book="http://example.org/book/"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
@@ -45,53 +46,132 @@
     <rdfs:label>hasReadingLevel</rdfs:label>
   </rdf:Property>
   <book:Book rdf:about="http://example.org/book/HungerGames">
-    <book:isRecommendedFor>
-      <user:User rdf:about="http://example.org/user/Bob">
-        <user:prefersTheme>
-          <book:Theme rdf:about="http://example.org/book/Mystery">
-            <rdfs:label>Mystery</rdfs:label>
-          </book:Theme>
-        </user:prefersTheme>
-        <user:hasReadingLevel>
-          <book:ReadingLevel rdf:about="http://example.org/book/Beginner">
-            <rdfs:label>Beginner</rdfs:label>
-          </book:ReadingLevel>
-        </user:hasReadingLevel>
-        <rdfs:label>Bob</rdfs:label>
-      </user:User>
-    </book:isRecommendedFor>
-    <book:hasReadingLevel rdf:resource="http://example.org/book/Beginner"/>
-    <book:hasTheme>
-      <book:Theme rdf:about="http://example.org/book/Fantasy">
-        <rdfs:label>Fantasy</rdfs:label>
-      </book:Theme>
-    </book:hasTheme>
+    <rdfs:label>Hunger Games</rdfs:label>
+    <dc:title>Hunger Games</dc:title>
     <book:hasTheme>
       <book:Theme rdf:about="http://example.org/book/ScienceFiction">
         <rdfs:label>Science Fiction</rdfs:label>
       </book:Theme>
     </book:hasTheme>
-    <rdfs:label>Hunger Games</rdfs:label>
-  </book:Book>
-  <book:Book rdf:about="http://example.org/book/TheSilentPatient">
+    <book:hasTheme>
+      <book:Theme rdf:about="http://example.org/book/Mystery">
+        <rdfs:label>Mystery</rdfs:label>
+      </book:Theme>
+    </book:hasTheme>
+    <book:hasReadingLevel>
+      <book:ReadingLevel rdf:about="http://example.org/book/Beginner">
+        <rdfs:label>Beginner</rdfs:label>
+      </book:ReadingLevel>
+    </book:hasReadingLevel>
     <book:isRecommendedFor>
-      <user:User rdf:about="http://example.org/user/Alice">
-        <user:prefersTheme rdf:resource="http://example.org/book/ScienceFiction"/>
-        <user:hasReadingLevel>
-          <book:ReadingLevel rdf:about="http://example.org/book/Intermediate">
-            <rdfs:label>Intermediate</rdfs:label>
-          </book:ReadingLevel>
-        </user:hasReadingLevel>
-        <rdfs:label>Alice</rdfs:label>
+      <user:User rdf:about="http://example.org/user/Bob">
+        <user:prefersTheme rdf:resource="http://example.org/book/Mystery"/>
+        <user:hasReadingLevel rdf:resource="http://example.org/book/Beginner"/>
+        <rdfs:label>Bob</rdfs:label>
       </user:User>
     </book:isRecommendedFor>
-    <book:hasReadingLevel rdf:resource="http://example.org/book/Intermediate"/>
+  </book:Book>
+  <book:Book rdf:about="http://example.org/book/TheBrothersKaramazov">
+    <rdfs:label>The Brothers Karamazov</rdfs:label>
+    <book:hasAuthor> Fyodor Dostoevsky</book:hasAuthor>
+    <book:hasTheme rdf:resource="http://example.org/book/Mystery"/>
+    <book:hasTheme rdf:resource="http://example.org/book/Romance"/>
+    <book:hasReadingLevel rdf:resource="http://example.org/book/Beginner"/>
+  </book:Book>
+  <book:Book rdf:about="http://example.org/book/AnnaKarenina">
+    <rdfs:label>Anna Karenina</rdfs:label>
+    <book:hasAuthor> Leo Tolstoy</book:hasAuthor>
+    <book:hasTheme rdf:resource="http://example.org/book/ScienceFiction"/>
+    <book:hasTheme rdf:resource="http://example.org/book/Romance"/>
+    <book:hasReadingLevel rdf:resource="http://example.org/book/Beginner"/>
+  </book:Book>
+  <book:Book rdf:about="http://example.org/book/Aesop&apos;sFables">
+    <rdfs:label>Aesop's Fables</rdfs:label>
+    <book:hasAuthor> Aesop</book:hasAuthor>
+    <book:hasTheme>
+      <book:Theme rdf:about="http://example.org/book/Fantasy">
+        <rdfs:label>Fantasy</rdfs:label>
+      </book:Theme>
+    </book:hasTheme>
+    <book:hasTheme rdf:resource="http://example.org/book/Mystery"/>
+    <book:hasReadingLevel rdf:resource="http://example.org/book/Beginner"/>
+  </book:Book>
+  <book:Book rdf:about="http://example.org/book/AsILayDying">
+    <rdfs:label>As I Lay Dying</rdfs:label>
+    <book:hasAuthor> William Faulkner</book:hasAuthor>
+    <book:hasTheme rdf:resource="http://example.org/book/Thriller"/>
+    <book:hasTheme rdf:resource="http://example.org/book/ScienceFiction"/>
+    <book:hasReadingLevel rdf:resource="http://example.org/book/Beginner"/>
+  </book:Book>
+  <book:Book rdf:about="http://example.org/book/AnneofGreenGables">
+    <rdfs:label>Anne of Green Gables</rdfs:label>
+    <book:hasAuthor> L.M. Montgomery</book:hasAuthor>
+    <book:hasTheme rdf:resource="http://example.org/book/Historical"/>
+    <book:hasTheme rdf:resource="http://example.org/book/Fantasy"/>
+    <book:hasReadingLevel rdf:resource="http://example.org/book/Beginner"/>
+  </book:Book>
+  <book:Book rdf:about="http://example.org/book/TheAdventuresofSherlockHolmes">
+    <rdfs:label>The Adventures of Sherlock Holmes</rdfs:label>
+    <book:hasAuthor> Arthur Conan Doyle</book:hasAuthor>
+    <book:hasTheme rdf:resource="http://example.org/book/Historical"/>
+    <book:hasTheme rdf:resource="http://example.org/book/ScienceFiction"/>
+    <book:hasReadingLevel>
+      <book:ReadingLevel rdf:about="http://example.org/book/Intermediate">
+        <rdfs:label>Intermediate</rdfs:label>
+      </book:ReadingLevel>
+    </book:hasReadingLevel>
+  </book:Book>
+  <book:Book rdf:about="http://example.org/book/carteamea">
+    <book:hasReadingLevel rdf:resource="http://example.org/book/Beginner"/>
+    <book:hasTheme rdf:resource="http://example.org/book/Fantasy"/>
+    <book:hasAuthor>eu </book:hasAuthor>
+    <book:hasDescription>cea mai tare carte</book:hasDescription>
+    <rdfs:label>cartea mea</rdfs:label>
+  </book:Book>
+  <book:Book rdf:about="http://example.org/book/HarryPotter">
     <book:hasTheme>
       <book:Theme rdf:about="http://example.org/book/Murder">
         <rdfs:label>Murder</rdfs:label>
       </book:Theme>
     </book:hasTheme>
+    <book:hasAuthor>Gigel
+    </book:hasAuthor>
+    <book:hasDescription>Best book</book:hasDescription>
+    <book:hasReadingLevel rdf:resource="http://example.org/book/Intermediate"/>
+    <book:hasTheme rdf:resource="http://example.org/book/Fantasy"/>
+    <rdfs:label>Harry Potter</rdfs:label>
+  </book:Book>
+  <book:Book rdf:about="http://example.org/book/Beloved">
+    <rdfs:label>Beloved</rdfs:label>
+    <book:hasAuthor> Toni Morrison</book:hasAuthor>
+    <book:hasTheme rdf:resource="http://example.org/book/Romance"/>
+    <book:hasTheme rdf:resource="http://example.org/book/Fantasy"/>
+    <book:hasReadingLevel>
+      <book:ReadingLevel rdf:about="http://example.org/book/Advanced">
+        <rdfs:label>Advanced</rdfs:label>
+      </book:ReadingLevel>
+    </book:hasReadingLevel>
+  </book:Book>
+  <book:Book rdf:about="http://example.org/book/BraveNewWorld">
+    <rdfs:label>Brave New World</rdfs:label>
+    <book:hasAuthor> Aldous Huxley</book:hasAuthor>
     <book:hasTheme rdf:resource="http://example.org/book/Mystery"/>
+    <book:hasTheme rdf:resource="http://example.org/book/Historical"/>
+    <book:hasReadingLevel rdf:resource="http://example.org/book/Beginner"/>
+  </book:Book>
+  <book:Book rdf:about="http://example.org/book/TheSilentPatient">
+    <book:hasTheme rdf:resource="http://example.org/book/Mystery"/>
+    <book:hasTheme rdf:resource="http://example.org/book/Fantasy"/>
+    <book:hasTheme rdf:resource="http://example.org/book/Murder"/>
+    <dc:title>The Silent Patient</dc:title>
+    <book:hasReadingLevel rdf:resource="http://example.org/book/Intermediate"/>
+    <book:isRecommendedFor>
+      <user:User rdf:about="http://example.org/user/Alice">
+        <user:prefersTheme rdf:resource="http://example.org/book/ScienceFiction"/>
+        <user:hasReadingLevel rdf:resource="http://example.org/book/Intermediate"/>
+        <rdfs:label>Alice</rdfs:label>
+      </user:User>
+    </book:isRecommendedFor>
     <rdfs:label>The Silent Patient</rdfs:label>
   </book:Book>
   <book:Book rdf:about="http://example.org/book/Sutton">
@@ -99,22 +179,94 @@
     <book:hasTheme rdf:resource="http://example.org/book/Mystery"/>
     <book:hasReadingLevel rdf:resource="http://example.org/book/Intermediate"/>
   </book:Book>
+  <book:Book rdf:about="http://example.org/book/TheBookThief">
+    <rdfs:label>The Book Thief</rdfs:label>
+    <book:hasAuthor> Markus Zusak</book:hasAuthor>
+    <book:hasTheme rdf:resource="http://example.org/book/Romance"/>
+    <book:hasTheme rdf:resource="http://example.org/book/ScienceFiction"/>
+    <book:hasReadingLevel rdf:resource="http://example.org/book/Advanced"/>
+  </book:Book>
+  <book:Book rdf:about="http://example.org/book/TheAlephandOtherStories">
+    <rdfs:label>The Aleph and Other Stories</rdfs:label>
+    <book:hasAuthor> Jorge Luis Borges</book:hasAuthor>
+    <book:hasTheme rdf:resource="http://example.org/book/Mystery"/>
+    <book:hasTheme rdf:resource="http://example.org/book/Fantasy"/>
+    <book:hasReadingLevel rdf:resource="http://example.org/book/Advanced"/>
+  </book:Book>
+  <book:Book rdf:about="http://example.org/book/1984">
+    <rdfs:label>1984</rdfs:label>
+    <book:hasAuthor> George Orwell</book:hasAuthor>
+    <book:hasTheme rdf:resource="http://example.org/book/ScienceFiction"/>
+    <book:hasTheme rdf:resource="http://example.org/book/Fantasy"/>
+    <book:hasReadingLevel rdf:resource="http://example.org/book/Advanced"/>
+  </book:Book>
+  <book:Book rdf:about="http://example.org/book/TheAlchemist">
+    <rdfs:label>The Alchemist</rdfs:label>
+    <book:hasAuthor> Paulo Coelho</book:hasAuthor>
+    <book:hasTheme rdf:resource="http://example.org/book/Romance"/>
+    <book:hasTheme rdf:resource="http://example.org/book/Fantasy"/>
+    <book:hasReadingLevel rdf:resource="http://example.org/book/Advanced"/>
+  </book:Book>
+  <book:Book rdf:about="http://example.org/book/AnimalFarm">
+    <rdfs:label>Animal Farm</rdfs:label>
+    <book:hasAuthor> George Orwell</book:hasAuthor>
+    <book:hasTheme rdf:resource="http://example.org/book/Historical"/>
+    <book:hasTheme rdf:resource="http://example.org/book/Romance"/>
+    <book:hasReadingLevel rdf:resource="http://example.org/book/Advanced"/>
+  </book:Book>
+  <book:Book rdf:about="http://example.org/book/CharlieandtheChocolateFactory">
+    <rdfs:label>Charlie and the Chocolate Factory</rdfs:label>
+    <book:hasAuthor> Roald Dahl</book:hasAuthor>
+    <book:hasTheme rdf:resource="http://example.org/book/Mystery"/>
+    <book:hasTheme rdf:resource="http://example.org/book/Thriller"/>
+    <book:hasReadingLevel rdf:resource="http://example.org/book/Beginner"/>
+  </book:Book>
+  <book:Book rdf:about="http://example.org/book/Alice&apos;sAdventuresinWonderland">
+    <rdfs:label>Alice's Adventures in Wonderland</rdfs:label>
+    <book:hasAuthor> Lewis Carroll</book:hasAuthor>
+    <book:hasTheme rdf:resource="http://example.org/book/ScienceFiction"/>
+    <book:hasTheme rdf:resource="http://example.org/book/Mystery"/>
+    <book:hasReadingLevel rdf:resource="http://example.org/book/Beginner"/>
+  </book:Book>
+  <book:Book rdf:about="http://example.org/book/TheCalloftheWild">
+    <rdfs:label>The Call of the Wild</rdfs:label>
+    <book:hasAuthor> Jack London</book:hasAuthor>
+    <book:hasTheme rdf:resource="http://example.org/book/Historical"/>
+    <book:hasTheme rdf:resource="http://example.org/book/Fantasy"/>
+    <book:hasReadingLevel rdf:resource="http://example.org/book/Beginner"/>
+  </book:Book>
   <book:Book rdf:about="http://example.org/book/Dune">
-    <book:hasReadingLevel>
-      <book:ReadingLevel rdf:about="http://example.org/book/Advanced">
-        <rdfs:label>Advanced</rdfs:label>
-      </book:ReadingLevel>
-    </book:hasReadingLevel>
+    <book:hasReadingLevel rdf:resource="http://example.org/book/Advanced"/>
     <book:hasTheme rdf:resource="http://example.org/book/Fantasy"/>
     <book:hasTheme rdf:resource="http://example.org/book/ScienceFiction"/>
     <rdfs:label>Dune</rdfs:label>
   </book:Book>
-  <book:Book rdf:about="http://example.org/book/HarryPotter">
-    <book:hasTheme rdf:resource="http://example.org/book/Murder"/>
-    <book:hasAuthor>J.K Rolling</book:hasAuthor>
-    <book:hasDescription>Best book</book:hasDescription>
-    <book:hasReadingLevel rdf:resource="http://example.org/book/Intermediate"/>
+  <book:Book rdf:about="http://example.org/book/Charlotte&apos;sWeb">
+    <rdfs:label>Charlotte's Web</rdfs:label>
+    <book:hasAuthor> E. B White</book:hasAuthor>
+    <book:hasTheme rdf:resource="http://example.org/book/ScienceFiction"/>
+    <book:hasTheme rdf:resource="http://example.org/book/Historical"/>
+    <book:hasReadingLevel rdf:resource="http://example.org/book/Beginner"/>
+  </book:Book>
+  <book:Book rdf:about="http://example.org/book/TheCatcherintheRye">
+    <rdfs:label>The Catcher in the Rye</rdfs:label>
+    <book:hasAuthor> J.D. Salinger</book:hasAuthor>
+    <book:hasTheme rdf:resource="http://example.org/book/ScienceFiction"/>
+    <book:hasTheme rdf:resource="http://example.org/book/Historical"/>
+    <book:hasReadingLevel rdf:resource="http://example.org/book/Beginner"/>
+  </book:Book>
+  <book:Book rdf:about="http://example.org/book/AdventuresofHuckleberryFinn">
+    <rdfs:label>Adventures of Huckleberry Finn</rdfs:label>
+    <book:hasAuthor> Mark Twain</book:hasAuthor>
     <book:hasTheme rdf:resource="http://example.org/book/Fantasy"/>
-    <rdfs:label>Harry Potter</rdfs:label>
+    <book:hasTheme rdf:resource="http://example.org/book/Mystery"/>
+    <book:hasReadingLevel rdf:resource="http://example.org/book/Beginner"/>
+  </book:Book>
+  <book:Book rdf:about="http://example.org/book/Catch-22">
+    <rdfs:label>Catch-22</rdfs:label>
+    <book:hasAuthor> Joseph Heller</book:hasAuthor>
+    <book:hasTheme rdf:resource="http://example.org/book/Historical"/>
+    <book:hasTheme rdf:resource="http://example.org/book/Thriller"/>
+    <book:hasReadingLevel rdf:resource="http://example.org/book/Advanced"/>
   </book:Book>
 </rdf:RDF>

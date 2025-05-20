@@ -115,37 +115,29 @@ function sendMessage(message) {
 }
 
 function initUserSelection() {
-    // Get the user dropdown button
-    const userDropdown = document.getElementById('userDropdown');
-    if (!userDropdown) return;
-
-    // Get the selected user from local storage
-    const selectedUser = localStorage.getItem('selectedUser');
-
-    // Update the dropdown button text if a user is selected
-    if (selectedUser) {
-        updateUserDropdown(selectedUser);
-    }
+    // This function is now empty as we're using server-side rendering with Thymeleaf
+    // to display the selected user. The button text is updated by Thymeleaf based on
+    // the currentUser attribute in the model.
+    console.log('User selection is now handled by server-side rendering');
 }
 
+// This function is no longer used as we're using form submissions for user selection
 function selectUser(username) {
-    // Store the selected user in local storage
-    localStorage.setItem('selectedUser', username);
-
-    // Update the dropdown button text
-    updateUserDropdown(username);
-
-    // Reload the page to apply user preferences
-    // This is a simple approach; in a more complex app, you might update the UI without reloading
-    window.location.reload();
+    console.log('This function is deprecated. User selection is now handled by form submissions.');
 }
 
 function updateUserDropdown(username) {
     const userDropdown = document.getElementById('userDropdown');
     if (!userDropdown) return;
 
-    // Update the dropdown button text
-    userDropdown.textContent = username;
+    // Update the dropdown button text (find the span inside the button)
+    const span = userDropdown.querySelector('span');
+    if (span) {
+        span.textContent = username;
+    } else {
+        // Fallback if span doesn't exist
+        userDropdown.textContent = username;
+    }
 
     // Add a visual indicator that a user is selected
     userDropdown.classList.add('btn-primary');

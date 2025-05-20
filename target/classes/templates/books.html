@@ -34,14 +34,28 @@
                         <div class="d-flex">
                             <div class="dropdown">
                                 <button class="btn btn-outline-primary dropdown-toggle" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Select User
+                                    <span th:text="${currentUser != null ? currentUser : 'Select User'}">Select User</span>
                                 </button>
                                 <ul class="dropdown-menu" aria-labelledby="userDropdown">
-                                    <li><a class="dropdown-item" href="#" onclick="selectUser('Alice')">Alice (Intermediate, Science Fiction)</a></li>
-                                    <li><a class="dropdown-item" href="#" onclick="selectUser('Bob')">Bob (Beginner, Mystery)</a></li>
+                                    <li><form th:action="@{/select-user}" method="POST">
+                                        <input type="hidden" name="username" value="Alice">
+                                        <button type="submit" class="dropdown-item">Alice (Intermediate, Science Fiction)</button>
+                                    </form></li>
+                                    <li><form th:action="@{/select-user}" method="POST">
+                                        <input type="hidden" name="username" value="Bob">
+                                        <button type="submit" class="dropdown-item">Bob (Beginner, Mystery)</button>
+                                    </form></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item" href="/clear-user">Show All Books</a></li>
                                 </ul>
                             </div>
                         </div>
+
+                        <!-- Add user filtering status message -->
+<!--                        <div th:if="${currentUser}" class="alert alert-info mt-3">-->
+<!--                            <strong>Showing books for:</strong> <span th:text="${currentUser}">User</span>-->
+<!--                            <a href="/clear-user" class="btn btn-sm btn-outline-secondary float-end">Clear Filter</a>-->
+<!--                        </div>-->
                     </div>
                 </div>
             </nav>

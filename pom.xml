@@ -61,15 +61,10 @@
             <version>${jung.version}</version>
         </dependency>
 
-        <!-- Vector Database - Langchain4j with Ollama -->
+        <!-- Vector Database - Langchain4j -->
         <dependency>
             <groupId>dev.langchain4j</groupId>
             <artifactId>langchain4j</artifactId>
-            <version>0.25.0</version>
-        </dependency>
-        <dependency>
-            <groupId>dev.langchain4j</groupId>
-            <artifactId>langchain4j-ollama</artifactId>
             <version>0.25.0</version>
         </dependency>
         <dependency>
@@ -84,12 +79,38 @@
             <version>0.25.0</version>
         </dependency>
 
+        <!-- Google AI (Gemini) SDK -->
+        <dependency>
+            <groupId>com.google.cloud</groupId>
+            <artifactId>google-cloud-aiplatform</artifactId>
+            <version>3.50.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.cloud</groupId>
+            <artifactId>google-cloud-vertexai</artifactId>
+            <version>0.5.0</version>
+        </dependency>
+
+        <!-- Explicitly define Guava version to resolve conflicts -->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>32.1.2-jre</version>
+        </dependency>
+
         <!-- Lombok for reducing boilerplate code -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
+
+        <dependency>
+            <groupId>io.github.cdimascio</groupId>
+            <artifactId>dotenv-java</artifactId>
+            <version>3.0.0</version>
+        </dependency>
+
 
         <!-- Testing -->
         <dependency>

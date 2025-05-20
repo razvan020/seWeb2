@@ -40,11 +40,19 @@
                         <div class="d-flex">
                             <div class="dropdown">
                                 <button class="btn btn-outline-primary dropdown-toggle" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Select User
+                                    <span th:text="${currentUser != null ? currentUser : 'Select User'}">Select User</span>
                                 </button>
                                 <ul class="dropdown-menu" aria-labelledby="userDropdown">
-                                    <li><a class="dropdown-item" href="#" onclick="selectUser('Alice')">Alice (Intermediate, Science Fiction)</a></li>
-                                    <li><a class="dropdown-item" href="#" onclick="selectUser('Bob')">Bob (Beginner, Mystery)</a></li>
+                                    <li><form th:action="@{/select-user}" method="POST">
+                                        <input type="hidden" name="username" value="Alice">
+                                        <button type="submit" class="dropdown-item">Alice (Intermediate, Science Fiction)</button>
+                                    </form></li>
+                                    <li><form th:action="@{/select-user}" method="POST">
+                                        <input type="hidden" name="username" value="Bob">
+                                        <button type="submit" class="dropdown-item">Bob (Beginner, Mystery)</button>
+                                    </form></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item" href="/clear-user">Show All Books</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -63,7 +71,7 @@
                         <div class="card-body">
                             <div th:if="${error}" class="alert alert-danger" role="alert" th:text="${error}"></div>
 
-                            <form th:action="@{'/edit-book/' + ${#uriEncoder.encode(book.uri)}}" method="POST">
+                            <form th:action="@{'/edit-book/' + ${book.id}}" method="POST">
                                 <div class="mb-3">
                                     <label for="title" class="form-label">Title</label>
                                     <input type="text" class="form-control" id="title" name="title" th:value="${book.title}" required>
@@ -85,7 +93,7 @@
                                         <option th:each="theme : ${themes}" 
                                                 th:value="${theme.uri}" 
                                                 th:text="${theme.name}"
-                                                th:selected="${book.themes != null && book.themes.stream().anyMatch(t -> t.uri == theme.uri)}">Theme</option>
+                                                th:selected="${bookThemeUris != null && bookThemeUris.contains(theme.uri)}">Theme</option>
                                     </select>
                                     <div class="form-text">Select one or more themes for the book.</div>
                                 </div>
@@ -97,7 +105,7 @@
                                         <option th:each="level : ${readingLevels}" 
                                                 th:value="${level.uri}" 
                                                 th:text="${level.name}"
-                                                th:selected="${book.readingLevel != null && book.readingLevel.uri == level.uri}">Reading Level</option>
+                                                th:selected="${book.readingLevel != null && book.readingLevel.uri eq level.uri}">Reading Level</option>
                                     </select>
                                 </div>
 

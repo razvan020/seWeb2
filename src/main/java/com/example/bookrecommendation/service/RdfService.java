@@ -3,6 +3,7 @@ package com.example.bookrecommendation.service;
 import org.apache.jena.rdf.model.*;
 import org.apache.jena.riot.RDFDataMgr;
 import org.apache.jena.riot.RDFFormat;
+import org.apache.jena.vocabulary.DC;
 import org.apache.jena.vocabulary.RDF;
 import org.apache.jena.vocabulary.RDFS;
 import org.springframework.stereotype.Service;
@@ -14,12 +15,14 @@ import edu.uci.ics.jung.algorithms.layout.CircleLayout;
 import edu.uci.ics.jung.algorithms.layout.Layout;
 import edu.uci.ics.jung.visualization.VisualizationImageServer;
 
+
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class RdfService {
@@ -28,8 +31,10 @@ public class RdfService {
     private static final String DEFAULT_RDF_PATH = "src/main/resources/rdf/book_recommendation.rdf";
 
     private Model currentModel;
+    private UserService userService;
 
-    public RdfService() {
+    public RdfService(UserService userService) {
+        this.userService = userService;
         // Create upload directory if it doesn't exist
         try {
             Files.createDirectories(Paths.get(UPLOAD_DIR));
@@ -293,51 +298,7 @@ public class RdfService {
         saveModel();
     }
 
-    public void updateBook(String bookUri, String title, List<String> themeUris, String readingLevelUri, String description, String author) {
-        // Get the book resource
-        Resource bookResource = currentModel.getResource(bookUri);
-        if (bookResource == null) {
-            throw new RuntimeException("Book not found: " + bookUri);
-        }
 
-        // Update rdfs:label
-        Statement labelStmt = bookResource.getProperty(RDFS.label);
-        if (labelStmt != null) {
-            bookResource.removeAll(RDFS.label);
-        }
-        bookResource.addProperty(RDFS.label, title);
-
-        // Update description
-        Property hasDescriptionProperty = currentModel.createProperty("http://example.org/book/hasDescription");
-        bookResource.removeAll(hasDescriptionProperty);
-        if (description != null && !description.isEmpty()) {
-            bookResource.addProperty(hasDescriptionProperty, description);
-        }
-
-        // Update author
-        Property hasAuthorProperty = currentModel.createProperty("http://example.org/book/hasAuthor");
-        bookResource.removeAll(hasAuthorProperty);
-        if (author != null && !author.isEmpty()) {
-            bookResource.addProperty(hasAuthorProperty, author);
-        }
-
-        // Update themes
-        Property hasThemeProperty = currentModel.createProperty("http://example.org/book/hasTheme");
-        bookResource.removeAll(hasThemeProperty);
-        for (String themeUri : themeUris) {
-            Resource themeResource = currentModel.createResource(themeUri);
-            bookResource.addProperty(hasThemeProperty, themeResource);
-        }
-
-        // Update reading level
-        Property hasReadingLevelProperty = currentModel.createProperty("http://example.org/book/hasReadingLevel");
-        bookResource.removeAll(hasReadingLevelProperty);
-        Resource readingLevelResource = currentModel.createResource(readingLevelUri);
-        bookResource.addProperty(hasReadingLevelProperty, readingLevelResource);
-
-        // Save the updated model
-        saveModel();
-    }
 
     private void saveModel() {
         try {
@@ -585,5 +546,108 @@ public class RdfService {
         }
 
         return readingLevels;
+    }
+
+    public List<Map<String, Object>> getRecommendedBooksForUser(String username) {
+        List<Map<String, Object>> allBooks = getAllBooks();
+        Map<String, Object> userPreferences = userService.getUserPreferences(username);
+
+        if (userPreferences.isEmpty()) {
+            return allBooks;
+        }
+
+        String userReadingLevel = (String) userPreferences.get("readingLevel");
+        List<String> userThemes = (List<String>) userPreferences.get("preferredThemes");
+
+        return allBooks.stream()
+                .filter(book -> {
+                    boolean readingLevelMatches = false;
+                    boolean themeMatches = false;
+
+                    // Check if book reading level matches user's reading level
+                    if (userReadingLevel != null && book.get("readingLevel") != null) {
+                        Map<String, String> bookReadingLevel = (Map<String, String>) book.get("readingLevel");
+                        readingLevelMatches = bookReadingLevel.get("uri").equals(userReadingLevel);
+                    }
+
+                    // Check if any book theme matches user's preferred themes
+                    if (userThemes != null && !userThemes.isEmpty() && book.get("themes") != null) {
+                        List<Map<String, String>> bookThemes = (List<Map<String, String>>) book.get("themes");
+                        themeMatches = bookThemes.stream()
+                                .anyMatch(theme -> userThemes.contains(theme.get("uri")));
+                    }
+
+                    // Include book if it matches either reading level or theme
+                    return readingLevelMatches || themeMatches;
+                })
+                .collect(Collectors.toList());
+    }
+
+    public void updateBook(String bookUri, String title, List<String> themes, String readingLevel,
+                           String description, String author) {
+        // Implementation for updating book details in the RDF model
+        // This method should properly handle updating the title, themes, and reading level
+
+        // Get the book resource
+        Resource bookResource = currentModel.getResource(bookUri);
+
+        // Update title
+        updateLiteral(bookResource, DC.title, title);
+
+        // Update author
+        if (author != null && !author.isEmpty()) {
+            updateLiteral(bookResource, DC.creator, author);
+        } else {
+            removeProperty(bookResource, DC.creator);
+        }
+
+        // Update description
+        if (description != null && !description.isEmpty()) {
+            updateLiteral(bookResource, DC.description, description);
+        } else {
+            removeProperty(bookResource, DC.description);
+        }
+
+        // Update reading level
+        Property hasReadingLevelProperty = currentModel.createProperty("http://example.org/book/hasReadingLevel");
+        updateObjectProperty(bookResource, hasReadingLevelProperty, readingLevel);
+
+        // Update themes
+        Property hasThemeProperty = currentModel.createProperty("http://example.org/book/hasTheme");
+        updateObjectProperties(bookResource, hasThemeProperty, themes);
+
+        // Save changes
+        saveModel();
+    }
+
+    private void updateLiteral(Resource resource, Property property, String value) {
+        resource.removeAll(property);
+        if (value != null && !value.isEmpty()) {
+            resource.addProperty(property, value);
+        }
+    }
+
+    private void updateObjectProperty(Resource resource, Property property, String objectUri) {
+        resource.removeAll(property);
+        if (objectUri != null && !objectUri.isEmpty()) {
+            Resource objectResource = currentModel.getResource(objectUri);
+            resource.addProperty(property, objectResource);
+        }
+    }
+
+    private void updateObjectProperties(Resource resource, Property property, List<String> objectUris) {
+        resource.removeAll(property);
+        if (objectUris != null) {
+            for (String uri : objectUris) {
+                if (!uri.isEmpty()) {
+                    Resource objectResource = currentModel.getResource(uri);
+                    resource.addProperty(property, objectResource);
+                }
+            }
+        }
+    }
+
+    private void removeProperty(Resource resource, Property property) {
+        resource.removeAll(property);
     }
 }
